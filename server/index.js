@@ -4,12 +4,12 @@ const { prisma } = require('./generated/prisma-client')
 async function main() {
 
   // Create a new user called `Alice`
-  const newUser = await prisma.createUser({ name: 'Alice' })
-  console.log(`Created new user: ${newUser.name} (ID: ${newUser.id})`)
+  const message = await prisma.createMessage({ message: 'Message One' })
+  console.log(`Created new user: ${message.message} (ID: ${message.id})`)
 
   // Read all users from the database and print them to the console
-  const allUsers = await prisma.users()
-  console.log(allUsers)
+  const allMessages = await prisma.messages()
+  console.log(allMessages)
 }
 
 main().catch(e => console.error(e))
