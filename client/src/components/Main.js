@@ -1,5 +1,5 @@
 import React from "react";
-//import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 
 import { SUCCESS } from "../redux/actions/ActionTypes";
 
@@ -11,30 +11,34 @@ import { SUCCESS } from "../redux/actions/ActionTypes";
 function Main(props) {
   const { messages, status } = props.messagesState;
   const { getMessages } = props;
+
+  console.log( props.messagesState )
+
   return (
     <>
       {/* <NavBar getReposByUsername={getReposByUsername} /> */}
       <div>
+        <button onClick={getMessages}>Hello</button>
         {status === SUCCESS ? (
           <>
             {/* <User repos={repos} /> */}
             {/* <Repos repos={repos} /> */}
-            { messages.map( message => (<p>{message}</p>)) }
+            {messages.map(message => (<p>{message.id}</p>))}
           </>
         ) : (
-          <>
-            {/* <MessagePage status={status} /> */}
-            <p>{status}</p>
-          </>
-        )}
+            <>
+              {/* <MessagePage status={status} /> */}
+              <p>{status}</p>
+            </>
+          )}
       </div>
     </>
   );
 }
 
-// Main.propTypes = {
-//   reposState: PropTypes.object,
-//   getReposByUsername: PropTypes.func
-// };
+Main.propTypes = {
+  messagesState: PropTypes.object,
+  getMessages: PropTypes.func
+};
 
 export default Main;

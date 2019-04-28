@@ -12,7 +12,13 @@ export const getMessages = async (dispatch, messagesService) => {
   dispatch({ type: REQUEST });
 
   try {
-    const response = await messagesService.getMessages();
+    const response = await messagesService.getMessages()
+
+    if (!response.ok) {
+      const error = {response}
+      throw error
+    }
+
     const messages = await response.json();
     const isMessagesEmpty = messages.length === 0;
     if (isMessagesEmpty) dispatch({ type: EMPTY });

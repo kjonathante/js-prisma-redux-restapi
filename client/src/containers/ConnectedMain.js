@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 
-import { getMessagesInjector } from "../actions/messages";
+import { getMessagesInjector } from "../redux/actions/messages";
 import Main from "../components/Main";
 
 const mapStateToProps = state => ({

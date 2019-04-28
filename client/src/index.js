@@ -5,9 +5,14 @@ import { createStore } from "redux";
 import * as serviceWorker from "./serviceWorker";
 
 import ConnectedMain from "./containers/ConnectedMain";
-import reducer from "./reducers";
+import reducer from "./redux/reducers";
+
+import { getMessagesInjector } from "./redux/actions/messages"
 
 const store = createStore(reducer);
+
+/* this will initialize the state */
+getMessagesInjector( store.dispatch )()
 
 ReactDOM.render(
   <Provider store={store}>
