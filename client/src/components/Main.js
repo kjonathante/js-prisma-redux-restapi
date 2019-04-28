@@ -9,7 +9,7 @@ import { SUCCESS } from "../redux/actions/ActionTypes";
 // import User from "./User";
 
 function Main(props) {
-  const { messages, status } = props.messagesState;
+  const { byIds, allIds, status } = props.messagesState;
   const { getMessages } = props;
 
   console.log( props.messagesState )
@@ -23,7 +23,7 @@ function Main(props) {
           <>
             {/* <User repos={repos} /> */}
             {/* <Repos repos={repos} /> */}
-            {messages.map(message => (<p>{message.id}</p>))}
+            {allIds.map(id => (<p key={id}>{byIds[id].message}</p>))}
           </>
         ) : (
             <>
