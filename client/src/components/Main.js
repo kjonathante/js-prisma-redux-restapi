@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 
 import { SUCCESS } from "../redux/actions/ActionTypes";
 
+import AddMessage from "../components/AddMessage"
+
 // import MessagePage from "../components/MessagePage";
 // import Repos from "../components/Repos";
 // import NavBar from "../components/NavBar";
@@ -10,7 +12,7 @@ import { SUCCESS } from "../redux/actions/ActionTypes";
 
 function Main(props) {
   const { byIds, allIds, status } = props.messagesState;
-  const { getMessages } = props;
+  const { getMessages, createMessage } = props;
 
   console.log( props.messagesState )
 
@@ -18,6 +20,7 @@ function Main(props) {
     <>
       {/* <NavBar getReposByUsername={getReposByUsername} /> */}
       <div>
+        <AddMessage createMessage={createMessage} />
         <button onClick={getMessages}>Hello</button>
         {status === SUCCESS ? (
           <>
@@ -38,7 +41,8 @@ function Main(props) {
 
 Main.propTypes = {
   messagesState: PropTypes.object,
-  getMessages: PropTypes.func
+  getMessages: PropTypes.func,
+  createMessage: PropTypes.func
 };
 
 export default Main;
