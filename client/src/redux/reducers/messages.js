@@ -1,4 +1,4 @@
-import { SUCCESS, ADD, DELETE } from "../actions/ActionTypes";
+import { SUCCESS, ADD, DELETE, UPDATE } from "../actions/ActionTypes";
 
 const initialState = {
   status: null,
@@ -32,6 +32,20 @@ export default function messages(state = initialState, action) {
       const newAllIds = allIds.filter(element => id !== element);
       const { [id]: removedValue, ...newByIds } = byIds;
       return { ...noChild, allIds: newAllIds, byIds: newByIds, status: SUCCESS };
+    }
+    case UPDATE: {
+      const { id, message } = action.payload;
+      return {
+        ...state,
+        byIds: {
+          ...state.byIds,
+          [id]: {
+            ...state.byIds[id],
+            message: message
+          }
+        },
+        status: SUCCESS
+      };    
     }
     default:
       return { ...state, status: action.type };
