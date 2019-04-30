@@ -1,6 +1,11 @@
 import { connect } from "react-redux";
 
-import { getMessagesInjector, createMessageInjector } from "../redux/actions/messages";
+import {
+  getMessagesInjector,
+  createMessageInjector,
+  deleteMessageInjector
+} from "../redux/actions/messages";
+
 import Main from "../components/Main";
 
 const mapStateToProps = state => ({
@@ -9,7 +14,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getMessages: getMessagesInjector(dispatch),
-  createMessage: createMessageInjector(dispatch)
+  createMessage: createMessageInjector(dispatch),
+  deleteMessage: deleteMessageInjector(dispatch),
 });
 
 export default connect(
