@@ -3,14 +3,18 @@ import fetch from "isomorphic-unfetch";
 export const messagesServiceFunction = fetch => ({
   getMessages: async () =>
     fetch(`/messages`),
-  createMessage: async message => 
+  createMessage: async message =>
     fetch(`/message`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ message })
-    })
+    }),
+  deleteMessage: async id =>
+    fetch(`/message/${id}`, {
+      method: "DELETE"
+    }),
 });
 
 export default messagesServiceFunction(fetch);
@@ -38,7 +42,7 @@ function postData(fetch, url = ``, data = {}) {
     referrer: "no-referrer", // no-referrer, *client
     body: JSON.stringify(data), // body data type must match "Content-Type" header
   })
-  //.then(response => response.json()); // parses JSON response into native Javascript objects 
+  //.then(response => response.json()); // parses JSON response into native Javascript objects
 }
 
 */

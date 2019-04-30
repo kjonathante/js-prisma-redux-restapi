@@ -5,7 +5,8 @@ import {
   SUCCESS,
   NOT_FOUND,
   ERROR,
-  ADD
+  ADD,
+  DELETE
 } from "./ActionTypes";
 
 /* this is just a helper function */
@@ -25,7 +26,7 @@ const receiveMessages = messages => {
   }
 }
 
-export const getMessages = async (dispatch, messagesService) => {
+const getMessages = async (dispatch, messagesService) => {
   //Set the applications to a "Loading" state
   dispatch({ type: REQUEST });
 
@@ -76,6 +77,34 @@ const createMessage = async (dispatch, messagesService, message) => {
   }
 };
 
+const deleteMessage = async (dispatch, messagesService, id) => {
+  //Set the applications to a "Loading" state
+  dispatch({ type: REQUEST });
+
+  try {
+    const response = await messagesService.deleteMessage(id)
+
+    if (!response.ok) {
+      const error = { response }
+      throw error
+    }
+
+    const result = await response.json();
+    console.log(result)
+    // const isMessagesEmpty = messages.length === 0;
+    // if (isMessagesEmpty) dispatch({ type: EMPTY });
+    //else 
+    dispatch({
+      type: DELETE,
+      payload: result
+    });
+  } catch (error) {
+    const isError404 = error.response && error.response.status === 404;
+    if (isError404) dispatch({ type: NOT_FOUND });
+    else dispatch({ type: ERROR });
+  }
+};
+
 export const getMessagesInjector = dispatch => {
   return () => {
     getMessages(dispatch, messagesService);
@@ -85,5 +114,11 @@ export const getMessagesInjector = dispatch => {
 export const createMessageInjector = dispatch => {
   return (message) => {
     createMessage(dispatch, messagesService, message)
+  }
+}
+
+export const deleteMessageInjector = dispatch => {
+  return (id) => {
+    deleteMessage(dispatch, messagesService, id)
   }
 }

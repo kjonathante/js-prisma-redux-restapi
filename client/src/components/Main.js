@@ -12,7 +12,7 @@ import AddMessage from "../components/AddMessage"
 
 function Main(props) {
   const { byIds, allIds, status } = props.messagesState;
-  const { getMessages, createMessage } = props;
+  const { getMessages, createMessage, deleteMessage } = props;
 
   console.log( props.messagesState )
 
@@ -26,7 +26,11 @@ function Main(props) {
           <>
             {/* <User repos={repos} /> */}
             {/* <Repos repos={repos} /> */}
-            {allIds.map(id => (<p key={id}>{byIds[id].message}</p>))}
+            {allIds.map(id => (
+              <p 
+                key={id}
+                onClick={ ()=>deleteMessage(id) }
+              >{byIds[id].message}</p>))}
           </>
         ) : (
             <>
