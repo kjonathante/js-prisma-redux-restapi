@@ -15,6 +15,14 @@ export const messagesServiceFunction = fetch => ({
     fetch(`/message/${id}`, {
       method: "DELETE"
     }),
+  updateMessage: async ({id,message}) =>
+    fetch(`/message/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ message })
+    }),
 });
 
 export default messagesServiceFunction(fetch);

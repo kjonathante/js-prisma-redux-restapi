@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import {
   getMessagesInjector,
   createMessageInjector,
-  deleteMessageInjector
+  deleteMessageInjector,
+  updateMessageInjector
 } from "../redux/actions/messages";
 
 import Main from "../components/Main";
@@ -16,6 +17,7 @@ const mapDispatchToProps = dispatch => ({
   getMessages: getMessagesInjector(dispatch),
   createMessage: createMessageInjector(dispatch),
   deleteMessage: deleteMessageInjector(dispatch),
+  updateMessage: updateMessageInjector(dispatch)
 });
 
 export default connect(
